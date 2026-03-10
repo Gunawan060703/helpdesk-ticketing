@@ -1,0 +1,11 @@
+﻿{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "composer install --no-dev && php artisan optimize"
+  },
+  "deploy": {
+    "startCommand": "php artisan serve --host=0.0.0.0 --port=\",
+    "healthcheckPath": "/",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
