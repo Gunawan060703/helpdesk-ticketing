@@ -12,13 +12,16 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Disable mpm_event and enable mpm_prefork (fix untuk error MPM)
+RUN a2dismod mpm_event && a2enmod mpm_prefork
+
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy application files (perbaikan di sini)
+# Copy application files
 COPY . /var/www/html/
 
 # Install composer
